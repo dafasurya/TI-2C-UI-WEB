@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Javascript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #studentForm {
+            margin-bottom: 20px;
+        }
+        #studentTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        #studentTable th, #studentTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #studentTable th {
+            background-color: #f2f2f2;
+        }
+        #studentTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #studentTable tbody tr:hover {
+            background-color: #ddd;
+        }
+        #studentTable th:first-child, #studentTable td:first-child {
+            width: 30%;
+        }
+        #studentTable th:last-child, #studentTable td:last-child {
+            width: 70%;
+        }
+        #studentForm label {
+            font-weight: bold;
+        }
+        #studentForm input[type="number"],
+        #studentForm input[type="text"],
+        #studentForm button {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #studentForm button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #studentForm button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="studentForm">
+        <label for="nim">NIM:</label><br>
+        <input type="number" id="nim" name="nim"><br>
+        <label for="name">Nama:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <button type="button" onclick="saveStudent()">Save</button>
+    </form>
+    
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var arrStudent = [];
+
+        function Student(nim, name) {
+            this.nim = nim;
+            this.name = name;
+        }
+
+        function saveStudent() {
+            var studentForm = document.getElementById("studentForm");
+            var nim = document.getElementById("nim").value;
+            var name = document.getElementById("name").value;
+
+            var student = new Student(nim, name);
+            arrStudent.push(student);
+            studentForm.reset();
+            showStudent(student);
+        }
+
+        function showStudent(student) {
+            var tbody = document.querySelector("#studentTable tbody");
+            var tr = document.createElement("tr");
+
+            var tdNim = document.createElement("td");
+            tdNim.textContent = student.nim;
+            tr.appendChild(tdNim);
+
+            var tdName = document.createElement("td");
+            tdName.textContent = student.name;
+            tr.appendChild(tdName);
+
+            tbody.appendChild(tr);
+        }
+    </script>
+</body>
+</html>
